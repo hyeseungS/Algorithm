@@ -34,10 +34,10 @@ class Solution {
 			if (minHeap.isEmpty())
 				currentTime = jobs[index][0];
 			else {
-                // 작업 시간 계산하고 합하기
+                		// 작업 시간 계산하고 합하기
 				int[] job = minHeap.poll();
 				answer += currentTime - job[0] + job[1];
-                // 현재 시간 업데이트
+                		// 현재 시간 업데이트
 				currentTime += job[1];
 			}
         }
