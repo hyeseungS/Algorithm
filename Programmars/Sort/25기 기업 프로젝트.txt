@@ -19,3 +19,23 @@
 <할 일>
 DB 설계, API 명세, 역할 분담, 프로젝트 기본 세팅
 (스웨거?)
+
+기본세팅 
+
+Build: Gradle
+Language: Java
+Java Version: 11
+Packaging: Jar
+Spring Boot Version: 2.6.4
+Dependencies
+
+- Spring Web
+- Spring Security - 인증 관리
+- Spring Data JPA
+- H2 Database
+- MySQL Driver
+- Validation - 유효성 검사
+- Thymeleaf - 템플릿엔진
+- Lombok - 어노테이션 라이브러리
+- Spring Boot DevTools
+나중에 추가 jwt
