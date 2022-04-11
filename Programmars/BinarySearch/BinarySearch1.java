@@ -4,7 +4,7 @@ class Solution {
         long answer = 0;
         Arrays.sort(times);
         long start = 0; // 시작 값
-        long end = (long) n * times[times.length-1]; // 마지막 값 (제일 오래 걸리는 시간)
+        long end = (long) n * times[times.length-1]; // 마지막 값 (가장 오래 걸리는 시간)
         
         // 이분 탐색
         while(start <= end) {
