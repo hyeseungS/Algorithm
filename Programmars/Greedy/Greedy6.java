@@ -1,31 +1,19 @@
+import java.util.*;
 class Solution {
-    public int solution(int n, int[] lost, int[] reserve) {
-        int answer = lost.length;
-        // 여분의 체육복을 가져왔지만 체육복을 잃어버린 학생
-        for(int l = 0; l < lost.length; l++){
-            for(int j = 0; j < reserve.length; j++){
-                if(lost[i] == reserve[j]){
-                    lost[i] = reserve[j] = -1;
-                    answer--;
-                    // break;
-                }
-            }
-        }
-        System.out.println(answer);
-        // 1 , 2, 3, 4, 5  /  1,2, 3, 5,6, 7, 8
-        // -1, +1했을시 같다면 체육복 빌려줄 수 있음
-        for(int i=0; i<reserve.length; i++){
-            if(reserve[i] == -1) continue;
-            for(int j=0; j<lost.length; j++){
-                if(lost[j] == -1) continue;
-                if(reserve[i] - 1 == lost[j] || reserve[i] + 1 == lost[j]){
-                    reserve[i] = lost[j] = -1;
-                    answer--;
-                    break;
-                }
-            }
-        }
-        System.out.println(answer);
-        return n - answer;
+    public int solution(int[][] routes) {
+        // 끝나는 시간 순 대로 오름차순 정렬
+		Arrays.sort(routes, (a,b)-> Integer.compare(a[1], b[1]));
+		int answer = 0;
+		
+		int min = Integer.MIN_VALUE;
+		for(int[] route : routes) {
+			if(min <  route[0] ) {
+				// 전 거의 끝나는 시간 보다 시작 시간이 큰 경우
+				// 안 겹치니까 변경하고, 숫자 더하기
+				min = route[1];
+				++answer;
+			}
+		}
+        return answer;
     }
 }
