@@ -1,0 +1,12 @@
+- subquery를 이용한 중첩질의 : verify_enroll.sql의 SelectTimeTable 프로시저에서 time_table_info 커서 선언 시에 강의 목록 검색으로 사용,
+- 조인 : select.jsp에서 course와 teach equal join
+- Oracle 함수
+- @ROWTYPE : verify_enroll.sql에서 SelectTimeTable 프로시저 생성 시 사용
+- 조건문 : function.sql에서 Date2EntrollYear, Date2EnrollSemester 함수 생성 시 사용
+- 반복문 : verify_enroll.sql의 SelectTimeTable 프로시저에서 수강신청 커서를 사용한 강의 조회를 위해 반복문 사용
+- 파라미터 있는 커서 : verify_enroll.sql의 SelectTimeTable 프로시저에서 강의 목록 조회 시 각 행을 위해 time_table_info 커서 사용
+                               -> 파라미터로 학생 번호(v_s_id), 수강신청년도(v_year), 수강신청학기(v_semester)를 파라미터로 받음
+- stored procedure : 
+- stored function :
+- callable statement
+- Null값 처리 :

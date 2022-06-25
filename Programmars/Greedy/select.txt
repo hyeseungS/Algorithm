@@ -1,0 +1,125 @@
+"select t.t_time, c.c_id, c.c_no, c.c_name, c.c_unit, t.p_id, t.t_day, t.t_where
+from course c, teach t
+where c.c_id=t.c_id and c.c_no=t.c_no and t.t_year='" + year + "'t.t_semester='" + semester +
+"'and (c.c_id, c.c_no) IN (select c_id, c_no from enroll where s_id='" + session_id + "')
+order by t.t_time";
+
+CREATE TABLE student
+(
+s_id VARCHAR2(10),
+s_name VARCHAR2(50) not null,
+s_addr VARCHAR2(200),
+s_year NUMBER not null,
+s_college VARCHAR2(50) not null,
+s_major VARCHAR2(50) not null,
+s_pwd VARCHAR2(50) not null,
+CONSTRAINT s_pk PRIMARY KEY (s_id)
+);
+
+insert into student values('1910646', '신혜승', '잠실', 2019, '공과대학', '컴퓨터과학과', '1910646');
+
+CREATE TABLE course
+(
+c_id VARCHAR2(10),
+c_no NUMBER,
+c_name VARCHAR2(50) not null,
+c_unit NUMBER not null,
+CONSTRAINT c_pk PRIMARY KEY (c_id, c_no)
+);
+
+insert into course values('21001715', 1, '컴파일러', 3);
+insert into course values('21003184', 1, '데이터베이스프로그래밍', 3);
+insert into course values('21003184', 2, '데이터베이스프로그래밍', 3);
+insert into course values('21000550', 1, '인공지능', 3);
+insert into course values('21003758', 1, '시스템종합설계', 3);
+insert into course values('21003761', 1, '컴퓨터특강', 3);
+insert into course values('21003202', 1, '컴퓨터네트워크2', 3);
+
+CREATE TABLE enroll 
+(
+s_id VARCHAR2(10),
+c_id VARCHAR2(10),
+c_no NUMBER,
+e_year NUMBER,
+e_semester NUMBER,
+CONSTRAINT e_pk PRIMARY KEY (s_id, c_id, c_no, e_year, e_semester),
+CONSTRAINT e_c_pk_fk FOREIGN KEY (c_id, c_no)
+REFERENCES course (c_id, c_no)
+);
+
+insert into enroll values('1910646', '21001715', 1, 2022, 1);
+insert into enroll values('1910646', '21003184', 2, 2022, 1);
+insert into enroll values('1910646', '21003761', 1, 2022, 1);
+
+CREATE TABLE professor
+(
+p_id VARCHAR2(10),
+p_name VARCHAR2(50) not null,
+p_college VARCHAR2(50) not null,
+p_major VARCHAR2(50) not null,
+p_pwd VARCHAR2(10) not null,
+CONSTRAINT p_pk PRIMARY KEY (p_id)
+);
+
+insert into professor values('1', '이현자', '공과대학', '컴퓨터과학과', 'p1');
+insert into professor values('2', '심준호', '공과대학', '컴퓨터과학과', 'p2');
+insert into professor values('3', '채희준', '공과대학', '컴퓨터과학과', 'p3');
+insert into professor values('4', '박숙영', '공과대학', '컴퓨터과학과', 'p4');
+insert into professor values('5', '김윤진', '공과대학', '컴퓨터과학과', 'p5');
+insert into professor values('6', '최종원', '공과대학', '컴퓨터과학과', 'p6');
+
+CREATE TABLE teach
+(
+c_id VARCHAR2(10),
+c_no NUMBER,
+p_id VARCHAR2(10),
+t_year NUMBER,
+t_semester NUMBER,
+t_day VARCHAR2(10) not null,
+t_time NUMBER not null,
+t_where VARCHAR2(10),
+t_max NUMBER not null,
+CONSTRAINT t_pk PRIMARY KEY (c_id, c_no, p_id, t_year, t_semester),
+CONSTRAINT t_c_pk_fk FOREIGN KEY (c_id, c_no)
+REFERENCES course (c_id, c_no),
+CONSTRAINT t_p_pk_fk FOREIGN KEY (p_id)
+REFERENCES professor (p_id)
+);
+
+insert into teach values('21001715', 1, 1, 2022, 1, '화, 목', 2, '명신관', 50);
+insert into teach values('21003184', 1, 2, 2022, 1, '월, 수', 3, '명신관', 30);
+insert into teach values('21003184', 2, 2, 2022, 1, '월, 수', 5, '명신관', 33);
+insert into teach values('21000550', 1, 3, 2022, 1, '월, 수', 1, '명신관', 50);
+insert into teach values('21003758', 1, 4, 2022, 1, '화, 목', 3, '명신관', 32);
+insert into teach values('21003761', 1, 5, 2022, 1, '금', 4, '명신관', 80);
+insert into teach values('21003202', 1, 6, 2022, 1, '월, 수', 4, '명신관', 50);
+
+select t.t_time, c.c_id, c.c_no, c.c_name, c.c_unit, t.p_id, t.t_day, t.t_where
+from course c, teach t
+where c.c_id=t.c_id and c.c_no=t.c_no and t.t_year='2022' and t.t_semester='1'
+and (c.c_id, c.c_no) IN (select c_id, c_no from enroll where e_year='2022' and e_semester='1' and s_id='1910646')
+order by t.t_time;
+
+mySQL2 = "select t.t_time, c.c_id, c.c_no, c.c_name, c.c_unit, t.p_id, t.t_day, t.t_where" +
+		" from course c, teach t" +
+		" where c.c_id=t.c_id and c.c_no=t.c_no"+
+		" and (c.c_id, c.c_no) in (select c_id, c_no from enroll where e_year=" + year + " and e_semester=" + semester + 
+		" and s_id='" + session_id + "')" +
+		" order by t.t_time";
+
+select t.t_time, c.c_id, c.c_no, c.c_name, c.c_unit, t.p_id, t.t_day, t.t_where
+from course c, teach t
+where c.c_id=t.c_id and c.c_no=t.c_no
+and (c.c_id, c.c_no) IN (select c_id, c_no from enroll where e_year='2022' and e_semester='1' and s_id='1910646')
+order by t.t_time;
+
+
+select t.t_time, c.c_id, c.c_no, c.c_name, c.c_unit, t.p_id, t.t_day, t.t_where from course c, teach t where c.c_id=t.c_id and c.c_no=t.c_no and (c.c_id, c.c_no) IN (select c_id, c_no from enroll where e_year='2022' and e_semester='1' and s_id='1910646') order by t.t_time;
+
+
+mySQL2 = "select t.t_time, c.c_id, c.c_no, c.c_name, c.c_unit, t.p_id, t.t_day, t.t_where" +
+		" from course c, teach t" +
+		" where c.c_id=t.c_id and c.c_no=t.c_no and t.t_year='" + year + "'and t.t_semester='" + semester +
+		"'and (c.c_id, c.c_no) IN (select c_id, c_no from enroll where e_year='" + year + "'and e_semester='" + semester + 
+		"'and s_id='" + session_id + "')" +
+		" order by t.t_time";
