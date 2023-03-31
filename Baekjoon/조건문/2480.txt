@@ -6,7 +6,6 @@ class Main {
 	    int a = in.nextInt();
 	    int b = in.nextInt();
 	    int c = in.nextInt();
-	    
 	    int prize;
 	    
 	    if(a == b) {
@@ -28,7 +27,6 @@ class Main {
 	        if(c > max) max = c;
 	        prize = max * 100;
 	    }
-	    
 	    
 	    System.out.print(prize);
 	}
