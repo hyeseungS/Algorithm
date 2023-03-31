@@ -5,7 +5,7 @@ class Main {
 	    Scanner in = new Scanner(System.in);
 	    int h = in.nextInt();
 	    int m = in.nextInt();
-	    if(h >= 45) 
+	    if(m >= 45) 
 	        System.out.printf("%d %d", h, m - 45);
 	    else 
 	        if (h > 0) System.out.printf("%d %d", h - 1, m + 15);
