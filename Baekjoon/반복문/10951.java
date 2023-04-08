@@ -12,7 +12,7 @@ class Main {
         StringTokenizer st;
         String s = "";
         
-        while(!((s = br.readLine()).equals("0 0"))) {
+        while((s = br.readLine()) != null) {
             
             st = new StringTokenizer(s);
             
