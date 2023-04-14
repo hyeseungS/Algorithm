@@ -10,9 +10,8 @@ class Main {
 	    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 	    
 	    String s = br.readLine();
-	    int i = Integer.parseInt(br.readLine());
 	    
-	    bw.write(s.charAt(i - 1));
+	    bw.write(s.length()+"");
 	    
 	    bw.close();
 	}
