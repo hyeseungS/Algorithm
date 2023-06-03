@@ -18,7 +18,7 @@ class Fruit implements Comparable<Fruit> {
         return this.key;
     }
 
-    // 정렬 기준은 '점수가 낮은 순서'
+    // 정렬 기준은 '키가 낮은 순서'
     @Override
     public int compareTo(Fruit other) {
         if (this.key < other.key) {
