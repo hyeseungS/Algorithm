@@ -5,25 +5,31 @@ class Main {
 	public static void main (String[] args) throws IOException {
 	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-	    StringTokenizer st = new StringTokenizer(br.readLine());
+	    StringTokenizer st;
 	    
-	    int n = Integer.parseInt(st.nextToken()); // 원소의 개수
-	    int target = Integer.parseInt(st.nextToken()); // 찾고자 하는 값
-	    
-	    // 전체 원소 입력 받기
+	    int N = Integer.parseInt(br.readLine()); // 부품의 개수
+	    // 부품 번호 입력 받기
 	    st = new StringTokenizer(br.readLine());
+	    int[] A = new int[N];
+	    for(int i = 0; i < N; i++) 
+	        A[i] = Integer.parseInt(st.nextToken());
+	    Arrays.sort(A);
 	    
-	    int[] array = new int[n];
-	    for(int i = 0; i < n; i++) {
-	        array[i] = Integer.parseInt(st.nextToken());
-	    }
+	    int M = Integer.parseInt(br.readLine()); // 문의한 부품 개수
+	    // 문의한 부품 번호 입력 받기
+	    st = new StringTokenizer(br.readLine());
+	    int[] B = new int[M];
+	    for(int i = 0; i < M; i++)
+	        B[i] = Integer.parseInt(st.nextToken()); 
 	    
 	    // 이진 탐색 수행 결과 출력
-	    int result = binarySearch(array, target, 0, n - 1);
-	    if(result == -1) {
-	    	bw.write("원소가 존재하지 않습니다.");
+	    for(int i = 0; i < M; i++) {
+	        int result = binarySearch(A, B[i], 0, N - 1);
+	        if(result == -1) {
+	    	    bw.write("no ");
+	        }
+	        else bw.write("yes ");
 	    }
-	    else bw.write(result + 1 + "");
 	    
 	    bw.close();
 	}

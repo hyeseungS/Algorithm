@@ -5,9 +5,7 @@ class Main {
 	public static void main (String[] args) throws IOException {
 	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-	    StringTokenizer st;
-	    
-	    st = new StringTokenizer(br.readLine());
+	    StringTokenizer st = new StringTokenizer(br.readLine());
 	    
 	    int n = Integer.parseInt(st.nextToken()); // 원소의 개수
 	    int target = Integer.parseInt(st.nextToken()); // 찾고자 하는 값

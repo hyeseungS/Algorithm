@@ -5,7 +5,9 @@ class Main {
 	public static void main (String[] args) throws IOException {
 	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-	    StringTokenizer st = new StringTokenizer(br.readLine());
+	    StringTokenizer st;
+	    
+	    st = new StringTokenizer(br.readLine());
 	    
 	    int n = Integer.parseInt(st.nextToken()); // 원소의 개수
 	    int target = Integer.parseInt(st.nextToken()); // 찾고자 하는 값
@@ -28,18 +30,17 @@ class Main {
 	    bw.close();
 	}
 	
-	// 이진 탐색 소스코드 구현(반복문)
+	// 이진 탐색 소스코드 구현(재귀 함수)
 	public static int binarySearch(int[] array, int target, int start, int end) {
-		int mid = 0;
-		while(start <= end) {
-			mid = (start + end) / 2;
-			// 찾은 경우 중간점 인덱스 반환
-			if(array[mid] == target) return mid;
-			// 중간점의 값보다 찾고자 하는 값이 작은 경우 왼쪽 확인
-			else if(array[mid] > target) end = mid - 1;
-			// 중간점의 값보다 찾고자 하는 값이 큰 경우 오른쪽 확인
-			else start = mid + 1;
-		}
-		return -1;
+	    if(start > end) {
+	        return -1;
+	    }
+	    int mid = (start + end) / 2;
+	    // 찾은 경우 중간점 인덱스 반환
+	    if(array[mid] == target) return mid;
+	    // 중간점의 값보다 찾고자 하는 값이 작은 경우 왼쪽 확인
+	    else if(array[mid] > target) return binarySearch(array, target, start, mid - 1);
+	    // 중간점의 값보다 찾고자 하는 값이 큰 경우 오른쪽 확인
+	    else return binarySearch(array, target, mid + 1, end);
 	}
 }
